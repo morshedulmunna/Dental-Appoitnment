@@ -1,5 +1,6 @@
 import React from "react";
 import chair from "../../assets/images/chair.png";
+import PrimaryButton from "../Shared/PrimaryButton";
 
 const Banner = () => {
   return (
@@ -16,9 +17,7 @@ const Banner = () => {
               Dhaka, serving all of your dental needs , with special emphasis on
               3D Dental Scanning
             </p>
-            <button class="btn btn-primary bg-gradient-to-r from-secondary to-primary  font-bold mt-12">
-              Get Started
-            </button>
+            <PrimaryButton>Get Started</PrimaryButton>
           </div>
         </div>
       </div>
