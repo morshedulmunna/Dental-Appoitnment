@@ -7,6 +7,7 @@ import {
   Login,
   Navbar,
   Reviews,
+  Signup,
 } from "./Pages/index";
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
         <Route path="/about" element={<About />} />
         <Route path="/appointment" element={<Appointment />} />
         <Route path="/Reviews" element={<Reviews />} />
