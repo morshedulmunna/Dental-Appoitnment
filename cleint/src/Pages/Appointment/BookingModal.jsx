@@ -1,7 +1,11 @@
 import React from "react";
 import { format } from "date-fns";
+import { Link } from "react-router-dom";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../firebaseConfig";
 
 const BookingModal = ({ date, treatment, setTreatment }) => {
+  const [user] = useAuthState(auth);
   const { _id, name, slots } = treatment;
 
   const handleBooking = (event) => {
@@ -63,11 +67,18 @@ const BookingModal = ({ date, treatment, setTreatment }) => {
               placeholder="Phone Number"
               className="input input-bordered w-full max-w-xs"
             />
-            <input
-              type="submit"
-              value="Submit"
-              className="btn btn-secondary w-full max-w-xs"
-            />
+
+            {user ? (
+              <input
+                type="submit"
+                value="Submit"
+                className="btn btn-secondary w-full max-w-xs"
+              />
+            ) : (
+              <Link className="btn btn-secondary w-full max-w-xs" to="/login">
+                Submit
+              </Link>
+            )}
           </form>
         </div>
       </div>
