@@ -13,10 +13,10 @@ const AppointmentBanner = ({ date, setDate }) => {
       }}
       className="container mx-auto"
     >
-      <div class="flex items-center justify-center gap-12 flex-col lg:flex-row-reverse ">
+      <div className="flex items-center justify-center gap-12 flex-col lg:flex-row-reverse ">
         <img
           src={chair}
-          class=" lg:w-[80%] h-[400px] object-cover w-full px-5 rounded-lg shadow-2xl  "
+          className=" lg:w-[80%] h-[400px] object-cover w-full px-5 rounded-lg shadow-2xl  "
           alt="Dentist Chair"
         />
         <div>
