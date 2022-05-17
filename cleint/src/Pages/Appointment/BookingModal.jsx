@@ -3,18 +3,50 @@ import { format } from "date-fns";
 import { Link } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../firebaseConfig";
+import toast from "react-hot-toast";
 
-const BookingModal = ({ date, treatment, setTreatment }) => {
+const BookingModal = ({ date, treatment, setTreatment, refetch }) => {
   const [user] = useAuthState(auth);
   const { _id, name, slots } = treatment;
+
+  const formattedDate = format(date, "PP");
 
   const handleBooking = (event) => {
     event.preventDefault();
     const slot = event.target.slot.value;
-    console.log(_id, name, slot);
+    const booking = {
+      treatmentId: _id,
+      treatment: name,
+      date: formattedDate,
+      slot,
+      patient: user.email,
+      patientName: user.displayName,
+      phone: event.target.phone.value,
+    };
 
-    // to close the modal
-    setTreatment(null);
+    console.log(booking);
+
+    fetch("http://localhost:8080/booking", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(booking),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+
+        if (data.success) {
+          toast.success(`Appointment is set, ${formattedDate} at ${slot}`);
+        } else {
+          toast.error(
+            `Already have and appointment on ${data.booking?.date} at ${data.booking?.slot}`
+          );
+        }
+        refetch();
+        setTreatment(null);
+      });
   };
 
   return (
@@ -54,18 +86,21 @@ const BookingModal = ({ date, treatment, setTreatment }) => {
               name="name"
               placeholder="Your Name"
               className="input input-bordered w-full max-w-xs"
+              required
             />
             <input
               type="email"
               name="email"
               placeholder="Email Address"
               className="input input-bordered w-full max-w-xs"
+              required
             />
             <input
               type="text"
               name="phone"
               placeholder="Phone Number"
               className="input input-bordered w-full max-w-xs"
+              required
             />
 
             {user ? (

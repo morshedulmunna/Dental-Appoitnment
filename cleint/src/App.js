@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+import Toaster from "react-hot-toast";
 import {
   About,
   Appointment,
@@ -23,6 +24,8 @@ function App() {
         <Route path="/Reviews" element={<Reviews />} />
       </Routes>
       <Footer />
+
+      <Toaster position="top-right" reverseOrder={false} />
     </>
   );
 }
