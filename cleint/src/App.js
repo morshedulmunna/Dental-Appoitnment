@@ -35,7 +35,7 @@ function App() {
           }
         >
           <Route index element={<MyAppointment />} />
-          {/* <Route path="/review" element={<MyReview />} /> */}
+          <Route path="review" element={<MyReview />} />
         </Route>
       </Routes>
       <Footer />
