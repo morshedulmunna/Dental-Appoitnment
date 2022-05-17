@@ -27,6 +27,11 @@ const Navbar = () => {
       <li>
         <Link to="/contact">Contact us</Link>
       </li>
+      {user && (
+        <li>
+          <Link to="/dashboard">Dashboard</Link>
+        </li>
+      )}
       <li className="border-l-[1px] border-slate-300 font-bold">
         {user ? (
           <Link

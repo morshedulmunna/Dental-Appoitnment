@@ -6,3 +6,6 @@ export { default as Signup } from "./Signup/Signup";
 export { default as About } from "./About/About";
 export { default as Appointment } from "./Appointment/Appointment";
 export { default as Reviews } from "./Reviews/Reviews";
+export { default as Dashboard } from "./Dashboard/Dashboard";
+export { default as MyAppointment } from "./Dashboard/MyAppointment";
+export { default as MyReview } from "./Dashboard/MyReview";
