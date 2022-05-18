@@ -78,7 +78,9 @@ const BookingModal = ({ date, treatment, setTreatment, refetch }) => {
               className="select select-bordered w-full max-w-xs"
             >
               {slots.map((slot) => (
-                <option value={slot}>{slot}</option>
+                <option key={slot + ""} value={slot}>
+                  {slot}
+                </option>
               ))}
             </select>
             <input
@@ -86,14 +88,14 @@ const BookingModal = ({ date, treatment, setTreatment, refetch }) => {
               name="name"
               placeholder="Your Name"
               className="input input-bordered w-full max-w-xs"
-              value={user.displayName}
+              value={user?.displayName}
             />
             <input
               type="email"
               name="email"
               placeholder="Email Address"
               className="input input-bordered w-full max-w-xs"
-              value={user.email}
+              value={user?.email}
             />
             <input
               type="text"

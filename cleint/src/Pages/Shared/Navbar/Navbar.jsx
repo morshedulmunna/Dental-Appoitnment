@@ -36,7 +36,10 @@ const Navbar = () => {
         {user ? (
           <Link
             className="text-red-800"
-            onClick={() => signOut(auth)}
+            onClick={() => {
+              signOut(auth);
+              localStorage.removeItem("accessToken");
+            }}
             to="/login"
           >
             Logut
