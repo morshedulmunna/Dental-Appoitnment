@@ -9,3 +9,4 @@ export { default as Reviews } from "./Reviews/Reviews";
 export { default as Dashboard } from "./Dashboard/Dashboard";
 export { default as MyAppointment } from "./Dashboard/MyAppointment";
 export { default as MyReview } from "./Dashboard/MyReview";
+export { default as MyHistory } from "./Dashboard/MyHistory";

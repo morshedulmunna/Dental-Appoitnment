@@ -7,6 +7,7 @@ import Service from "./Service";
 
 const AvailableAppointments = ({ date }) => {
   const [treatment, setTreatment] = useState(null);
+
   const formatedDate = format(date, "PP");
 
   const {

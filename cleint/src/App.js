@@ -9,6 +9,7 @@ import {
   Home,
   Login,
   MyAppointment,
+  MyHistory,
   MyReview,
   Navbar,
   Reviews,
@@ -36,6 +37,7 @@ function App() {
         >
           <Route index element={<MyAppointment />} />
           <Route path="review" element={<MyReview />} />
+          <Route path="history" element={<MyHistory />} />
         </Route>
       </Routes>
       <Footer />

@@ -7,7 +7,8 @@ import {
 import auth from "../../firebaseConfig";
 import { useForm } from "react-hook-form";
 import Loading from "../Shared/Loading";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import useToken from "../../Hooks/useToken";
 
 const SignUp = () => {
   const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
@@ -21,10 +22,16 @@ const SignUp = () => {
 
   const [updateProfile, updating, updateError] = useUpdateProfile(auth);
 
+  const [token] = useToken(user || gUser);
+
   const navigate = useNavigate();
+  const location = useLocation();
+  let from = location.state?.from?.pathname || "/";
+  if (token) {
+    navigate(from, { replace: true });
+  }
 
   let signInError;
-
   if (loading || gLoading || updating) {
     return <Loading></Loading>;
   }
@@ -46,8 +53,6 @@ const SignUp = () => {
   const onSubmit = async (data) => {
     await createUserWithEmailAndPassword(data.email, data.password);
     await updateProfile({ displayName: data.name });
-    console.log("update done");
-    navigate("/appointment");
   };
   return (
     <div className="flex h-full justify-center items-center">

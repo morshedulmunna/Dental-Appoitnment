@@ -86,14 +86,14 @@ const BookingModal = ({ date, treatment, setTreatment, refetch }) => {
               name="name"
               placeholder="Your Name"
               className="input input-bordered w-full max-w-xs"
-              required
+              value={user.displayName}
             />
             <input
               type="email"
               name="email"
               placeholder="Email Address"
               className="input input-bordered w-full max-w-xs"
-              required
+              value={user.email}
             />
             <input
               type="text"
