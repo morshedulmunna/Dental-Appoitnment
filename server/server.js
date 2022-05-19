@@ -86,14 +86,22 @@ async function run() {
     });
 
     // my booked data
-    app.get("/booking", async (req, res) => {
+    app.get("/booking", verifyJWT, async (req, res) => {
       const patient = req.query.patient;
-      const authorization = req.headers.authorization;
-      const query = { patient: patient };
-      const bookings = await bookingCollection.find(query).toArray();
-      res.send(bookings);
+      const decodedEmail = req.decoded.email;
+      if (patient === decodedEmail) {
+        const query = { patient: patient };
+        const bookings = await bookingCollection.find(query).toArray();
+        return res.send(bookings);
+      } else {
+        return res.status(403).send({ message: "forbidden access" });
+      }
     });
-
+    // Get All Users
+    app.get("/user", verifyJWT, async (req, res) => {
+      const users = await userCollection.find().toArray();
+      res.send(users);
+    });
     // POST Booking Info
     app.post("/booking", async (req, res) => {
       const booking = req.body;
@@ -126,6 +134,30 @@ async function run() {
       );
 
       res.send({ result, token });
+    });
+
+    // Make Admin Roll
+    app.put("/user/admin/:email", verifyJWT, async (req, res) => {
+      const email = req.params.email;
+      const requester = req.decoded.email;
+      console.log(requester);
+
+      const requesterAccount = await userCollection.findOne({
+        email: requester,
+      });
+
+      console.log(requesterAccount.role);
+
+      if (requesterAccount.role === "admin") {
+        const filter = { email: email };
+        const updateDoc = {
+          $set: { role: "admin" },
+        };
+        const result = await userCollection.updateOne(filter, updateDoc);
+        res.send(result);
+      } else {
+        res.status(403).send({ message: "forbidden" });
+      }
     });
   } finally {
   }

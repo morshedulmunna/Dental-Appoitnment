@@ -14,6 +14,7 @@ import {
   Navbar,
   Reviews,
   Signup,
+  Users,
 } from "./Pages/index";
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
           <Route index element={<MyAppointment />} />
           <Route path="review" element={<MyReview />} />
           <Route path="history" element={<MyHistory />} />
+          <Route path="users" element={<Users />} />
         </Route>
       </Routes>
       <Footer />
