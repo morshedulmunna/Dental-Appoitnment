@@ -16,6 +16,7 @@ import {
   Signup,
   Users,
 } from "./Pages/index";
+import RequireAdmin from "./Pages/Shared/RequireAdmin";
 
 function App() {
   return (
@@ -39,7 +40,14 @@ function App() {
           <Route index element={<MyAppointment />} />
           <Route path="review" element={<MyReview />} />
           <Route path="history" element={<MyHistory />} />
-          <Route path="users" element={<Users />} />
+          <Route
+            path="users"
+            element={
+              <RequireAdmin>
+                <Users />
+              </RequireAdmin>
+            }
+          />
         </Route>
       </Routes>
       <Footer />
